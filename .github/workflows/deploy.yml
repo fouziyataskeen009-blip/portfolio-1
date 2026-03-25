@@ -1,0 +1,42 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [ main ]  # Runs every time you push to the main branch
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: HTML Hint (Linting)
+        run: |
+          # Simple check to ensure HTML is well-formed
+          npx htmlhint index.html
+
+  deploy:
+    needs: build-and-test
+    if: github.event_name == 'push' # Only deploy on actual pushes, not PRs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # If using a static site generator or build step, add it here.
+      # Since this is pure HTML, we just prepare the files.
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Upload the entire root directory
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
