@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>John Doe | Portfolio</title>
     <style>
         :root {
             --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
             --bg-color: #f8fafc;
             --text-color: #1e293b;
+            --card-bg: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             margin: 0;
             background-color: var(--bg-color);
@@ -23,6 +25,7 @@
             text-align: center;
             padding: 4rem 1rem;
             background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .profile-pic {
@@ -42,111 +45,147 @@
 
         h2 {
             text-align: center;
-            border-bottom: 2px solid var(--primary-color);
-            display: inline-block;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
         }
 
         .section {
-            text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         /* Certificates Grid */
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
         }
 
         .cert-card {
-            background: white;
+            background: var(--card-bg);
             padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
         }
 
         .cert-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
 
         .cert-card img {
             width: 100%;
-            border-radius: 4px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .cert-card p {
+            font-weight: 600;
+            margin: 10px 0;
         }
 
         /* Contact Form */
-        form {
-            max-width: 500px;
+        .contact-container {
+            max-width: 550px;
             margin: 0 auto;
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: left;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: bold;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         input, textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            ring: 2px solid var(--primary-color);
         }
 
         button {
             background: var(--primary-color);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
             font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.2s;
         }
 
         button:hover {
-            background: #1d4ed8;
+            background: var(--primary-hover);
+        }
+
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+        <img src="https://via.placeholder.com/150" alt="John Doe" class="profile-pic">
         <h1>John Doe</h1>
         <p>Full Stack Developer | Designer | Lifelong Learner</p>
     </header>
 
     <div class="container">
-        
         <section class="section">
             <h2>My Certificates</h2>
             <div class="cert-grid">
                 <div class="cert-card">
-                    <img src="https://via.placeholder.com/200x150" alt="Cert 1">
+                    <img src="https://via.placeholder.com/200x150" alt="Web Dev">
                     <p>Web Development Boot Camp</p>
                 </div>
                 <div class="cert-card">
-                    <img src="https://via.placeholder.com/200x150" alt="Cert 2">
+                    <img src="https://via.placeholder.com/200x150" alt="JS">
                     <p>Advanced JavaScript</p>
                 </div>
                 <div class="cert-card">
-                    <img src="https://via.placeholder.com/200x150" alt="Cert 3">
+                    <img src="https://via.placeholder.com/200x150" alt="UI/UX">
                     <p>UI/UX Design Basics</p>
                 </div>
                 <div class="cert-card">
-                    <img src="https://via.placeholder.com/200x150" alt="Cert 4">
+                    <img src="https://via.placeholder.com/200x150" alt="Cloud">
                     <p>Cloud Architecture</p>
                 </div>
             </div>
@@ -154,58 +193,70 @@
 
         <section class="section">
             <h2>Contact Me</h2>
-            <form action="#">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="How can I help you?"></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="How can I help you?"></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn">Send Message</button>
+                </form>
+            </div>
         </section>
-
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // 1. Initialize Supabase Correctly
+        const supabaseUrl = 'https://kggzfjhibbcsnjqvnorh.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnZ3pmamhpYmJjc25qcXZub3JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MDgyMzcsImV4cCI6MjA4OTk4NDIzN30.sC8KCJMEb3hV9h-7oQdJGfHA3X4QgURlG_OZH1GZ7u4';
+        
+        // RECTIFIED: Use the global supabase object to call createClient
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-<script>
-    // 1. Initialize Supabase
-    const supabaseUrl = 'https://kggzfjhibbcsnjqvnorh.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnZ3pmamhpYmJjc25qcXZub3JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MDgyMzcsImV4cCI6MjA4OTk4NDIzN30.sC8KCJMEb3hV9h-7oQdJGfHA3X4QgURlG_OZH1GZ7u4';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
 
-    // 2. Handle Form Submission
-    const contactForm = document.querySelector('form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI Feedback
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Sending...';
 
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
 
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
+            try {
+                // 3. Insert into Supabase
+                const { error } = await _supabase
+                    .from('contact_messages')
+                    .insert([{ name, email, message }]);
 
-        // 3. Insert into Supabase
-        const { data, error } = await supabase
-            .from('contact_messages')
-            .insert([{ name, email, message }]);
+                if (error) throw error;
 
-        if (error) {
-            alert('Error sending message: ' + error.message);
-        } else {
-            alert('Message sent successfully!');
-            contactForm.reset(); // Clear the form
-        }
-    });
-</script>
+                alert('Message sent successfully!');
+                contactForm.reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error sending message: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Send Message';
+            }
+        });
+    </script>
 </body>
 </html>
