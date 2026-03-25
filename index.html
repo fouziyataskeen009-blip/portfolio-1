@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Certificates Grid */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cert-card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        /* Contact Form */
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+        <h1>John Doe</h1>
+        <p>Full Stack Developer | Designer | Lifelong Learner</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="section">
+            <h2>My Certificates</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Cert 1">
+                    <p>Web Development Boot Camp</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Cert 2">
+                    <p>Advanced JavaScript</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Cert 3">
+                    <p>UI/UX Design Basics</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Cert 4">
+                    <p>Cloud Architecture</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Contact Me</h2>
+            <form action="#">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="How can I help you?"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // 1. Initialize Supabase
+    const supabaseUrl = 'YOUR_SUPABASE_URL';
+    const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // 2. Handle Form Submission
+    const contactForm = document.querySelector('form');
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+
+        // 3. Insert into Supabase
+        const { data, error } = await supabase
+            .from('contact_messages')
+            .insert([{ name, email, message }]);
+
+        if (error) {
+            alert('Error sending message: ' + error.message);
+        } else {
+            alert('Message sent successfully!');
+            contactForm.reset(); // Clear the form
+        }
+    });
+</script>
+</body>
+</html>
